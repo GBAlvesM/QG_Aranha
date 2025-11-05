@@ -2,6 +2,7 @@
 
 @import url(https://db.onlinewebfonts.com/c/6cbb7ca3b9dee526ede81a12a8a08b00?family=Mixed+Breed+Bold);
 
+
 *, body {
     margin: 0px;
     padding: 0px;
@@ -9,24 +10,58 @@
 }
 
 .navbar {
-    background: url("../assets/patternNavbar.jpg");
-    background-repeat: no-repeat;
+    height: 73px;
+    background: url("../assets/patternNavbar.png");
     background-size: cover;
-    height: 75px;
-    background-position-y: -500px;
+    background-repeat: no-repeat;
 
     font-family: 'Mixed Breed Bold';
+    
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    gap: 350px;
+    justify-content: space-between;
+    padding: 0 40px;
+
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+
+    border-bottom: 3px solid rgb(255, 255, 255);
 }
+
 
 .navbar a {
     text-decoration: none;
     color: #ffff;
-    margin: 0px 15px 0px 15px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    text-shadow: 2px 2px black;
+}
+
+.menucentral {
+    margin-left: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+
+}
+
+.menucentral a {
+    transition-duration: 0.3s;
+}
+
+.menucentral a:hover {
+    cursor: pointer;
+    color: #c80c0c;
+}
+
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
 }
 
 .user a {
@@ -38,11 +73,30 @@
     transition-duration: 0.3s;
 }
 
+
 .user a:hover {
-    transform: skew(-25deg) scale(1.06);
+    transform: skew(-25deg) scale(1.07);
     background-color: #850f0f;
 }
 
 .logo {
     height: 50px;
+}
+
+.banner {
+    background-color: #1a4881;
+    backdrop-filter: blur(100px);
+    height: 365px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.banner img {
+    transform: scaleX(-1) translateY(-130px);
+    filter: drop-shadow(-10px 5px 16px #00000089);
+}
+
+.conteudo {
+    background-color: orange;
+    height: 600px;
 }
