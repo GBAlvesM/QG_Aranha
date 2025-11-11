@@ -15,22 +15,119 @@
             <div class="inputs">
                 <p>Nome</p>
                 <div class="inputicon"><img src="assets/nome.png" alt="" class="icone"><input type="text" id="ipt_nome" placeholder="Insira seu nome" autocomplete="off"></div>
+                <p id="chknome" class="chk"></p>
                 <p>E-mail</p>
                 <div class="inputicon"><img src="assets/email.png" alt="" class="icone"><input type="text" id="ipt_email" placeholder="Insira seu e-mail" autocomplete="off"></div>
+                <p id="chkemail" class="chk"></p>
                 <p>Senha</p>
-                <div class="inputicon"><img src="assets/senha.png" alt="" class="icone"><input type="password" id="ipt_senha" placeholder="Insira sua senha" autocomplete="off"></div>
+                <div class="inputicon"><img src="assets/senha.png" alt="" class="icone"><input type="password" id="ipt_senha" placeholder="Insira sua senha" autocomplete="off" onkeyup="verifsenha()"></div>
+                <p id="chksenha" class="chk"></p>
                 <p>Confirmar senha</p>
-                <div class="inputicon"><img src="assets/senha.png" alt="" class="icone"><input type="password" id="ipt_confirmaSenha" placeholder="Confirme a senha" autocomplete="off"></div>
+                <div class="inputicon"><img src="assets/senha.png" alt="" class="icone"><input type="password" id="ipt_confirmaSenha" placeholder="Confirme a senha" autocomplete="off" ></div>
+                <p id="chkcsenha" class="chk"></p>
                 <p class="quem">Quem você prefere?</p>
-                <select name="" id="">
+                <select name="" id="selectAranha">
                     <option value="#">Selecione...</option>
                     <option value="peter">Peter Parker</option>
                     <option value="miles">Miles Morales</option>
                 </select>
-                <button>Cadastro</button>
+                <p id="res" class="chk"></p>
+                <button onclick="cadastrar()">Cadastro</button>
                 <a href="index.html" class="voltar">Voltar ao site</a>
             </div>
         </div>
     </div>
 </body>
+<script>
+    let validasenha = false
+
+    function cadastrar() {
+        let nome = ipt_nome.value
+        let email = ipt_email.value
+        let senha = ipt_senha.value
+        let csenha = ipt_confirmaSenha.value
+        let validanome = false
+        let validaemail = false
+        let validacsenha = false
+        let validaprefere = false
+        let preferencia = selectAranha.value
+        
+
+        if (nome == '') {
+            chknome.innerHTML = 'Por favor informe o seu nome'
+        } else if (nome.includes(1) || nome.includes(2) || nome.includes(3) || nome.includes(4) || nome.includes(5) || nome.includes(6) || nome.includes(7) || nome.includes(8) || nome.includes(9) || nome.includes(0)){
+            chknome.innerHTML = 'Informe um nome válido!'
+        } else {
+            chknome.innerHTML = ''
+            validanome = true
+        }
+
+        if (email == '') {
+            chkemail.innerHTML = 'Por favor informe o seu e-mail'
+        } else if (!(email.includes('@'))) {
+            chkemail.innerHTML = 'Informe um e-mail válido!'
+        } else {
+            chkemail.innerHTML = ''
+            validaemail = true
+        }
+        if (senha == '') {
+            chksenha.innerHTML = 'Por favor informe a sua senha'
+        }
+
+        if (csenha == '' && validasenha == true) {
+            chkcsenha.innerHTML = 'Confirme a senha'
+        } else if ((csenha != senha) && validasenha == true) {
+            chkcsenha.innerHTML = 'As senhas não coincidem!'
+        } else {
+            chkcsenha.innerHTML = ''
+            validacsenha = true
+        }
+
+        if (preferencia == '#') {
+            res.innerHTML = 'Por favor informe a sua preferência!'
+        } else {
+            res.innerHTML = ''
+            validaprefere = true
+        }
+
+        if (validanome && validasenha && validacsenha && validaemail && validaprefere) {
+            alert('Cadastro efetuado com sucesso!')
+
+            window.location.href = ("login.html")
+        }
+    }
+
+    function verifsenha() {
+        let senha = ipt_senha.value
+        let csenha = ipt_confirmaSenha.value
+        let errosenha = ''
+
+        if (senha != '') {
+            if (senha.length < 8) {
+                errosenha += 'A senha deve conter pelo menos 8 caracteres <br>'
+            }
+            if (senha == senha.toUpperCase()) {
+                errosenha += 'A senha deve conter letras minúsculas <br>'
+            }
+            if (senha == senha.toLowerCase()) {
+                errosenha += 'A senha deve conter letras maiúsculas <br>'
+            }
+            if (!(senha.includes(1)) && !(senha.includes(2)) && !(senha.includes(3)) && !(senha.includes(4)) && !(senha.includes(5)) && !(senha.includes(6)) && !(senha.includes(7)) && !(senha.includes(8)) && !(senha.includes(9)) && !(senha.includes(0))) {
+                errosenha += 'A senha deve conter números <br>'
+            }
+            if (!(senha.includes('@')) && !(senha.includes('!')) && !(senha.includes('#')) && !(senha.includes('$')) && !(senha.includes('%'))) {
+                errosenha += 'A senha deve conter um caracter especial (!, @, #, $, %) <br>'
+            }
+            
+            if (errosenha != '') {
+                chksenha.innerHTML = `${errosenha}`
+            } else {
+                chksenha.innerHTML = ''
+                validasenha = true
+            }
+        } else {
+            chksenha.innerHTML = ''
+        }
+    }
+</script>
 </html>
