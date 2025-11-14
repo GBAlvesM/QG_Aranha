@@ -65,7 +65,7 @@ body {
     background-blend-mode: multiply;
 }
 
-#iniciar button {
+#btnIniciarQuiz button {
     display: inline-block;
     text-decoration: none;
     background-color: rgb(186, 29, 29);
@@ -80,14 +80,14 @@ body {
     transition-duration: 0.3s;
 }
 
-#iniciar button:hover {
+#btnIniciarQuiz button:hover {
     background-color: rgb(139, 19, 19);
     transform: skew(15deg) scale(1.02);
     cursor: pointer;
 }
 
 .box {
-    height: 70%;
+    height: 75%;
     width: 55%;
     background-color: white;
     border: 4px solid black;
@@ -104,6 +104,7 @@ body {
 #informacao {
     font-size: 0.9rem;
     font-weight: 600;
+    margin-top: 20px;
 }
 
 .logo {
@@ -112,7 +113,7 @@ body {
 }
 
 #opcoes {
-    margin-top: 40px;
+    margin-top: 15px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -146,4 +147,38 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
+}
+
+#botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 50px;
+}
+
+#botoes button {
+    border: 2px solid black;
+    box-shadow: 3px 4px black;
+    padding: 4px 8px;
+    font-size: 1.05rem;
+    background-color: rgb(248, 231, 154);
+    font-family: var(--fonte-corpo);
+    transition-duration: 0.3s;
+}
+
+#botoes button:hover {
+    background-color: rgb(210, 194, 122);
+    cursor: pointer;
+}
+
+#botoes button:disabled:hover {
+    cursor: not-allowed;
+}
+
+.textocorreta {
+    background-color: rgba(36, 203, 36, 0.57);
+}
+
+.textoerrada {
+    background-color: rgba(203, 36, 36, 0.57);
 }

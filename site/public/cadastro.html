@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
     <title>Cadastro</title>
 </head>
+
 <body>
     <div class="container">
         <div class="boxcadastro">
@@ -14,16 +16,20 @@
             <h1>Cadastre-se na Central Aranha</h1>
             <div class="inputs">
                 <p>Nome</p>
-                <div class="inputicon"><img src="assets/nome.png" alt="" class="icone"><input type="text" id="ipt_nome" placeholder="Insira seu nome" autocomplete="off"></div>
+                <div class="inputicon"><img src="assets/nome.png" alt="" class="icone"><input type="text" id="ipt_nome"
+                        placeholder="Insira seu nome" autocomplete="off"></div>
                 <p id="chknome" class="chk"></p>
                 <p>E-mail</p>
-                <div class="inputicon"><img src="assets/email.png" alt="" class="icone"><input type="text" id="ipt_email" placeholder="Insira seu e-mail" autocomplete="off"></div>
+                <div class="inputicon"><img src="assets/email.png" alt="" class="icone"><input type="text"
+                        id="ipt_email" placeholder="Insira seu e-mail" autocomplete="off"></div>
                 <p id="chkemail" class="chk"></p>
                 <p>Senha</p>
-                <div class="inputicon"><img src="assets/senha.png" alt="" class="icone"><input type="password" id="ipt_senha" placeholder="Insira sua senha" autocomplete="off" onkeyup="verifsenha()"></div>
+                <div class="inputicon"><img src="assets/senha.png" alt="" class="icone"><input type="password"
+                        id="ipt_senha" placeholder="Insira sua senha" autocomplete="off" onkeyup="verifsenha()"></div>
                 <p id="chksenha" class="chk"></p>
                 <p>Confirmar senha</p>
-                <div class="inputicon"><img src="assets/senha.png" alt="" class="icone"><input type="password" id="ipt_confirmaSenha" placeholder="Confirme a senha" autocomplete="off" ></div>
+                <div class="inputicon"><img src="assets/senha.png" alt="" class="icone"><input type="password"
+                        id="ipt_confirmaSenha" placeholder="Confirme a senha" autocomplete="off"></div>
                 <p id="chkcsenha" class="chk"></p>
                 <p class="quem">Quem você prefere?</p>
                 <select name="" id="selectAranha">
@@ -51,11 +57,11 @@
         let validacsenha = false
         let validaprefere = false
         let preferencia = selectAranha.value
-        
+
 
         if (nome == '') {
             chknome.innerHTML = 'Por favor informe o seu nome'
-        } else if (nome.includes(1) || nome.includes(2) || nome.includes(3) || nome.includes(4) || nome.includes(5) || nome.includes(6) || nome.includes(7) || nome.includes(8) || nome.includes(9) || nome.includes(0)){
+        } else if (nome.includes(1) || nome.includes(2) || nome.includes(3) || nome.includes(4) || nome.includes(5) || nome.includes(6) || nome.includes(7) || nome.includes(8) || nome.includes(9) || nome.includes(0)) {
             chknome.innerHTML = 'Informe um nome válido!'
         } else {
             chknome.innerHTML = ''
@@ -93,7 +99,22 @@
         if (validanome && validasenha && validacsenha && validaemail && validaprefere) {
             alert('Cadastro efetuado com sucesso!')
 
-            window.location.href = ("login.html")
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nome,
+                    emailServer: email,
+                    senhaServer: senha
+                }),
+            })
+            
+
+            // window.location.href = ("login.html")
         }
     }
 
@@ -118,7 +139,7 @@
             if (!(senha.includes('@')) && !(senha.includes('!')) && !(senha.includes('#')) && !(senha.includes('$')) && !(senha.includes('%'))) {
                 errosenha += 'A senha deve conter um caracter especial (!, @, #, $, %) <br>'
             }
-            
+
             if (errosenha != '') {
                 chksenha.innerHTML = `${errosenha}`
             } else {
@@ -130,4 +151,5 @@
         }
     }
 </script>
+
 </html>

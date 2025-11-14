@@ -8,10 +8,10 @@
     <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
     <title>Quiz</title>
 </head>
-<body onload="esconder()">
+<body onload="onloadEsconder()">
     <div class="container">
         <div class="volta"><a href="index.html" class="voltar">Voltar ao site</a></div>
-        <div id="iniciar"><button onclick="iniciarQuiz()">Iniciar quiz</button></div>
+        <div id="btnIniciarQuiz"><button onclick="iniciarQuiz()">Iniciar quiz</button></div>
         <div class="box" id="jogo">
             <img src="assets/favicon.png" alt="" class="logo">
             <div id="questoes">Questão: <span id="questaoA"></span> de <span id="quantQuestoes"></span></div>
@@ -43,112 +43,266 @@
                     </span>
                 </div>
             </div>
+            <div id="botoes">
+                <button onclick="submeter()" id="btnSubmeter">Enviar resposta</button>
+                <button onclick="avancar()" id="btnProx" disabled>Ir para próxima questão</button>
+                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+            </div>
         </div>
     </div>
 </body> 
 <script>
-    const perguntas = [
+    const listaDeQuestoes = [
 
         {
         pergunta: 'Qual é o nome do cientista brilhante que se torna o vilão Doutor Octopus?',
-        letraA: 'Curt Connors',
-        letraB: 'Otto Octavius',
-        letraC: 'Adrian Toomes',
-        letraD: 'Flint Marko',
-        correta: 'letraB'
+        alternativaA: 'Curt Connors',
+        alternativaB: 'Otto Octavius',
+        alternativaC: 'Adrian Toomes',
+        alternativaD: 'Flint Marko',
+        alternativaCorreta: 'alternativaB'
         },
         {
         pergunta: 'Qual personagem de apoio é famoso por ser o editor-chefe do jornal Daily Bugle e por constantemente difamar o Homem-Aranha em suas manchetes?',
-        letraA: 'Robbie Robertson',
-        letraB: 'Norman Osborn',
-        letraC: 'J. Jonah. Jameson (JJJ)',
-        letraD: 'George Stacy',
-        correta: 'letraC' 
+        alternativaA: 'Robbie Robertson',
+        alternativaB: 'Norman Osborn',
+        alternativaC: 'J. Jonah. Jameson (JJJ)',
+        alternativaD: 'George Stacy',
+        alternativaCorreta: 'alternativaC' 
         },
         {
         pergunta: 'Em qual bairro de Nova York Peter Parker viveu a maior parte de sua vida com a Tia May e o Tio Ben?',
-        letraA: 'Manhattam',
-        letraB: 'Metrópolis',
-        letraC: 'Queens',
-        letraD: 'Brooklyn',
-        correta: 'letraC' 
+        alternativaA: 'Manhattam',
+        alternativaB: 'Metrópolis',
+        alternativaC: 'Queens',
+        alternativaD: 'Brooklyn',
+        alternativaCorreta: 'alternativaC' 
         },
         {
         pergunta: 'O que o Sentido-Aranha faz?',
-        letraA: 'Aumenta a força física do Peter Parker',
-        letraB: 'Permite que ele se comunique telepáticamente com as aranhas',
-        letraC: 'Cria e dispara teias orgânicas do seu pulso',
-        letraD: 'Alerta Peter Parker dos perigos iminentes',
-        correta: 'letraD' 
+        alternativaA: 'Aumenta a força física do Peter Parker',
+        alternativaB: 'Permite que ele se comunique telepáticamente com as aranhas',
+        alternativaC: 'Cria e dispara teias orgânicas do seu pulso',
+        alternativaD: 'Alerta Peter Parker dos perigos iminentes',
+        alternativaCorreta: 'alternativaD' 
         },
         {
         pergunta: 'Qual é o nome verdadeiro do vilão original e mais icônico Duende Verde?',
-        letraA: 'Norman Osborn',
-        letraB: 'Flash Thompson',
-        letraC: 'Harry Osborn',
-        letraD: 'Rodercik Kingsley',
-        correta: 'letraA' 
+        alternativaA: 'Norman Osborn',
+        alternativaB: 'Flash Thompson',
+        alternativaC: 'Harry Osborn',
+        alternativaD: 'Rodercik Kingsley',
+        alternativaCorreta: 'alternativaA' 
         },
         {
         pergunta: 'Quem foi o criador dos Lançadores de Teia do Homem-Aranha, o equipamento que permite disparar as teias?',
-        letraA: 'Tony Stark',
-        letraB: 'Reed Richards',
-        letraC: 'Otto Octavius',
-        letraD: 'Peter Parker',
-        correta: 'letraD' 
+        alternativaA: 'Tony Stark',
+        alternativaB: 'Reed Richards',
+        alternativaC: 'Otto Octavius',
+        alternativaD: 'Peter Parker',
+        alternativaCorreta: 'alternativaD' 
         },
         {
         pergunta: 'Antes de se tornar o vilão Venom, qual repórter do Daily Bugle se uniu ao simbionte alienígena em busca de vingança contra Peter Parker?',
-        letraA: 'Cletus Kasady',
-        letraB: 'Eddie Brock',
-        letraC: 'Mac Gargan',
-        letraD: 'Flash Thompson',
-        correta: 'letraB' 
+        alternativaA: 'Cletus Kasady',
+        alternativaB: 'Eddie Brock',
+        alternativaC: 'Mac Gargan',
+        alternativaD: 'Flash Thompson',
+        alternativaCorreta: 'alternativaB' 
         },
         {
         pergunta: 'Qual foi a frase marcante dita pelo Tio Ben a Peter Parker que se tornou o lema e a bússola moral do herói?',
-        letraA: 'A coragem de um homem não está em não ter medo, mas em superá-lo.',
-        letraB: 'O preço da glória é a responsabilidade pessoal.',
-        letraC: 'Com grandes poderes, vêm grandes responsabilidades.',
-        letraD: 'A única coisa que se interpõe entre você e seu sonho é a vontade de tentar.',
-        correta: 'letraC' 
+        alternativaA: 'A coragem de um homem não está em não ter medo, mas em superá-lo.',
+        alternativaB: 'O preço da glória é a responsabilidade pessoal.',
+        alternativaC: 'Com grandes poderes, vêm grandes responsabilidades.',
+        alternativaD: 'A única coisa que se interpõe entre você e seu sonho é a vontade de tentar.',
+        alternativaCorreta: 'alternativaC' 
         },
         {
         pergunta: 'Qual é o trabalho mais comum de Peter Parker para se sustentar?',
-        letraA: 'Fotógrafo',
-        letraB: 'Carteiro',
-        letraC: 'Professor de Ciências',
-        letraD: 'Cientista de Laboratório',
-        correta: 'letraA' 
+        alternativaA: 'Fotógrafo',
+        alternativaB: 'Carteiro',
+        alternativaC: 'Professor de Ciências',
+        alternativaD: 'Cientista de Laboratório',
+        alternativaCorreta: 'alternativaA' 
         },
         {
         pergunta: 'Qual é o nome da garota que Peter Parker considerou seu primeiro amor, conhecida por sua morte trágica causada pelo Duende Verde?',
-        letraA: 'Liz Allan',
-        letraB: 'Mary Jane Watson',
-        letraC: 'Betty Brant',
-        letraD: 'Gwen Stacy',
-        correta: 'letraD' 
+        alternativaA: 'Liz Allan',
+        alternativaB: 'Mary Jane Watson',
+        alternativaC: 'Betty Brant',
+        alternativaD: 'Gwen Stacy',
+        alternativaCorreta: 'alternativaD' 
         }
     ]
 
-    let quantidadeQuestoes = perguntas.length
-    let questaoAtual = 0
+    let numeroDaQuestaoAtual = 0
+    let pontuacaoFinal = 0
+    let tentativaIncorreta = 0
     let certas = 0
     let erradas = 0
-    let tentativaIncorreta = 0
-    let pontuacaoFinal = 0
+    let quantidadeDeQuestoes = listaDeQuestoes.length
+    // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
 
-    function esconder() {
-        jogo.style.display = "none"
+    function onloadEsconder() {
+        document.getElementById('jogo').style.display = "none"
     }
 
     function iniciarQuiz() {
-        jogo.style.display = "flex"
-        iniciar.style.display = "none"
+        document.getElementById('jogo').style.display = "flex"
+        document.getElementById('btnIniciarQuiz').style.display = "none"
 
-        document.getElementById('quantQuestoes').innerHTML = quantidadeQuestoes
+        document.getElementById('quantQuestoes').innerHTML = quantidadeDeQuestoes
 
-        
+        preencherHTMLcomQuestaoAtual(0)
+
+        btnSubmeter.disabled = false
+        btnProx.disabled = true
+        // btnConcluir.disabled = true
+        btnTentarNovamente.disabled = true
+    }
+
+    function preencherHTMLcomQuestaoAtual(index) {
+        habilitarAlternativas(true)
+        const questaoAtual = listaDeQuestoes[index]
+        numeroDaQuestaoAtual = index
+        console.log("questaoAtual")
+        console.log(questaoAtual)
+        document.getElementById("questaoA").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
+        document.getElementById("txtQuestao").innerHTML = questaoAtual.pergunta;
+        document.getElementById("labelOpcaoA").innerHTML = questaoAtual.alternativaA;
+        document.getElementById("labelOpcaoB").innerHTML = questaoAtual.alternativaB;
+        document.getElementById("labelOpcaoC").innerHTML = questaoAtual.alternativaC;
+        document.getElementById("labelOpcaoD").innerHTML = questaoAtual.alternativaD;
+    }
+
+    function submeter() {
+        const options = document.getElementsByName("option"); // recupera alternativas no html
+
+        let hasChecked = false
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].checked) {
+                hasChecked = true
+                break
+            }
+        }
+
+        if (!hasChecked) {
+            alert("Não há alternativas escolhidas. Escolha uma opção.")
+        } else {
+            btnSubmeter.disabled = true
+            btnProx.disabled = false
+
+            habilitarAlternativas(false)
+
+            checarResposta()
+        }
+    }
+
+    function habilitarAlternativas(trueOrFalse) {
+        let opcaoEscolhida = trueOrFalse ? false : true
+
+        opcaoA.disabled = opcaoEscolhida
+        opcaoB.disabled = opcaoEscolhida
+        opcaoC.disabled = opcaoEscolhida
+        opcaoD.disabled = opcaoEscolhida
+
+    }
+
+    function avancar() {
+        btnProx.disabled = true
+        btnSubmeter.disabled = false
+
+        desmarcarRadioButtons()
+
+        if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+        } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) {
+            alert("Atenção... a próxima é a ultima questão!")
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+        } else {
+            finalizarJogo()
+        }
+        limparCoresBackgroundOpcoes()
+    }
+
+    function tentarNovamente() {
+        // atualiza a página
+        window.location.reload()
+    }
+
+    function checarResposta() {
+        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
+        const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
+
+        const options = document.getElementsByName("option"); // recupera alternativas no html
+
+        let alternativaCorreta = null // variável para armazenar a alternativa correta
+
+        options.forEach((option) => {
+            if (option.value === respostaQuestaoAtual) {
+                console.log("alternativaCorreta está no componente: " + alternativaCorreta)
+                alternativaCorreta = option.labels[0].id
+            }
+        })
+
+        // verifica se resposta assinalada é correta
+        options.forEach((option) => {
+            if (option.checked === true && option.value === respostaQuestaoAtual) {
+                document.getElementById(alternativaCorreta).classList.add("textocorreta")
+                pontuacaoFinal++
+                certas++
+                numeroDaQuestaoAtual++
+            } else if (option.checked && option.value !== respostaQuestaoAtual) {
+                const wrongLabelId = option.labels[0].id
+
+                document.getElementById(wrongLabelId).classList.add("textoerrada")
+                document.getElementById(alternativaCorreta).classList.add("textocorreta")
+                tentativaIncorreta++
+                erradas++
+                numeroDaQuestaoAtual++
+            }
+        })
+    }
+
+    function limparCoresBackgroundOpcoes() {
+        const options = document.getElementsByName("option");
+        options.forEach((option) => {
+            document.getElementById(option.labels[0].id).classList.remove("textoerrada")
+            document.getElementById(option.labels[0].id).classList.remove("textocorreta")
+        })
+    }
+
+    function desmarcarRadioButtons() {
+        const options = document.getElementsByName("option");
+        for (let i = 0; i < options.length; i++) {
+            options[i].checked = false;
+        }
+    }
+
+    function finalizarJogo() {
+        let textoParaMensagemFinal = null
+        let classComCoresParaMensagemFinal = null
+        const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
+
+        if (porcentagemFinalDeAcertos <= 0.3) {
+            textoParaMensagemFinal = "Parece que você não estudou..."
+            classComCoresParaMensagemFinal = "textoerrada"
+        }
+        else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
+            textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
+            classComCoresParaMensagemFinal = "textoerrada"
+        }
+        else if (porcentagemFinalDeAcertos >= 0.9) {
+            textoParaMensagemFinal = "Uau, parabéns!"
+            classComCoresParaMensagemFinal = "textocorreta"
+        }
+
+        btnProx.disabled = true
+        btnSubmeter.disabled = true
+        // btnConcluir.disabled = true
+        btnTentarNovamente.disabled = false
+
     }
 </script>
 </html>
