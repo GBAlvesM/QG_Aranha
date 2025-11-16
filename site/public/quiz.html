@@ -318,6 +318,19 @@
             txtClassificacao.innerHTML = 'ESPETACULAR! Seu conhecimento é impecável. Você é o maior fã e o verdadeiro Homem-Aranha! Parabéns!'
         }
 
+        fetch("/usuarios/quiz", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    pontuacaoFinalServer: pontuacaoFinal,
+                    idServer: sessionStorage.ID_USUARIO
+                }),
+            })
+
         btnProx.disabled = true
         btnSubmeter.disabled = true
         // btnConcluir.disabled = true

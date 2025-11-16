@@ -15,7 +15,7 @@
             <a href="index.html">Início</a>
             <a href="historia.html">História</a>
             <a href="filmes.html" style="color: #ff0000;">Filmes</a>
-            <a href="quiz.html">Quiz</a>
+            <a href="#" onclick="logado()" id="linkquiz">Quiz</a>
             <a href="sobre.html">Sobre Mim</a>
         </div>
         <div class="user">
@@ -37,21 +37,21 @@
                     <div class="ftxt">
                         <div id="f1" class="cardfilme"></div>
                         <div class="boxfilme">
-                            <h2>Homem-Aranha 1</h2>
+                            <h2>Homem-Aranha 1 (2002)</h2>
                             <p>Peter Parker é mordido por uma aranha geneticamente modificada e assume o manto do herói. Ele precisa proteger Mary Jane ao enfrentar seu primeiro grande inimigo: o Duende Verde.</p>
                         </div>
                     </div>
                     <div class="ftxt">
                         <div id="f2" class="cardfilme"></div>
                         <div class="boxfilme">
-                            <h2>Homem-Aranha 2</h2>
+                            <h2>Homem-Aranha 2 (2004)</h2>
                             <p>Peter luta para equilibrar sua vida pessoal, acadêmica e heroica. Ele precisa deter Dr. Octopus, um cientista brilhante que se torna um vilão descontrolado após um experimento falhar.</p>
                         </div>
                     </div>
                     <div class="ftxt">
                         <div id="f3" class="cardfilme"></div>
                         <div class="boxfilme">
-                            <h2>Homem-Aranha 3</h2>
+                            <h2>Homem-Aranha 3 (2007)</h2>
                             <p>Peter enfrenta múltiplas ameaças (Homem-Areia, Venom e Duende Verde Jr.) enquanto lida com a influência sombria e corruptora do simbionte alienígena em sua personalidade.</p>
                         </div>
                     </div>
@@ -60,14 +60,14 @@
                     <div class="ftxt">
                         <div id="f1a" class="cardfilme"></div>
                         <div class="boxfilme">
-                            <h2>O Espetacular Homem-Aranha</h2>
+                            <h2>O Espetacular Homem-Aranha (2012)</h2>
                             <p>Peter investiga o misterioso passado de seus pais e desenvolve seus poderes. Ele se apaixona por Gwen Stacy e confronta o Lagarto, uma versão criatura do Dr. Curt Connors.</p>
                         </div>
                     </div>
                     <div class="ftxt">
                         <div id="f2a" class="cardfilme"></div>
                         <div class="boxfilme">
-                            <h2>O Espetacular Homem-Aranha 2</h2>
+                            <h2>O Espetacular Homem-Aranha 2 (2014)</h2>
                             <p>Peter lida com a promessa que fez ao pai de Gwen sobre mantê-la segura. Ele enfrenta Electro e descobre segredos chocantes sobre a obscura corporação Oscorp.</p>
                         </div>
                     </div>
@@ -76,21 +76,21 @@
                     <div class="ftxt">
                         <div id="f1t" class="cardfilme"></div>
                         <div class="boxfilme">
-                            <h2>Homem-Aranha: De Volta ao Lar</h2>
+                            <h2>Homem-Aranha: De Volta ao Lar (2017)</h2>
                             <p>Peter tenta provar seu valor como Vingador, lidando com os desafios do ensino médio. Ele enfrenta o Abutre, que usa tecnologia alienígena em seus crimes.</p>
                         </div>
                     </div>
                     <div class="ftxt">
                         <div id="f2t" class="cardfilme"></div>
                         <div class="boxfilme">
-                            <h2>Homem-Aranha: Longe de Casa</h2>
+                            <h2>Homem-Aranha: Longe de Casa (2019)</h2>
                             <p>Durante uma viagem escolar pela Europa, Peter é recrutado por Nick Fury para lutar contra os Elementais, ao lado do misterioso herói interdimensional Mysterio.</p>
                         </div>
                     </div>
                     <div class="ftxt">
                         <div id="f3t" class="cardfilme"></div>
                         <div class="boxfilme">
-                            <h2>Homem-Aranha: Sem Volta Para Casa</h2>
+                            <h2>Homem-Aranha: Sem Volta Para Casa (2021)</h2>
                             <p>Após ter sua identidade revelada, Peter pede um feitiço ao Dr. Estranho. O feitiço falha, trazendo vilões multiversais de outras realidades para o MCU.</p>
                         </div>
                     </div>
@@ -99,14 +99,14 @@
                     <div class="ftxt">
                         <div id="f1m" class="cardfilme"></div>
                         <div class="boxfilme">
-                            <h2>Homem-Aranha no Aranhaverso</h2>
+                            <h2>Homem-Aranha no Aranhaverso (2018)</h2>
                             <p>Miles Morales, mordido por uma aranha, conhece outras versões do Homem-Aranha de diferentes dimensões. Eles devem se unir para deter o vilão Rei do Crime.</p>
                         </div>
                     </div>
                     <div class="ftxt">
                         <div id="f2m" class="cardfilme"></div>
                         <div class="boxfilme">
-                            <h2>Homem-Aranha: Através do Aranhaverso</h2>
+                            <h2>Homem-Aranha: Através do Aranhaverso (2023)</h2>
                             <p>Miles viaja pelo multiverso e se reúne com Gwen Stacy, mas entra em conflito com a Sociedade Aranha ao questionar a necessidade dos "eventos canônico".</p>
                         </div>
                     </div>
@@ -206,6 +206,16 @@
         filmestobey.style.display = "none"
         filmesandrew.style.display = "none"
         filmestom.style.display = "none"
+    }
+
+    function logado () {
+        var link = document.getElementById("linkquiz")
+
+        if (sessionStorage.getItem("ID_USUARIO")) {
+            link.href = "quiz.html"
+        } else {
+            link.href = "login.html"
+        }
     }
 </script>
 </html>

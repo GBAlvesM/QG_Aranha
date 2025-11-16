@@ -34,8 +34,8 @@
                 <p class="quem">Quem você prefere?</p>
                 <select name="" id="selectAranha">
                     <option value="#">Selecione...</option>
-                    <option value="peter">Peter Parker</option>
-                    <option value="miles">Miles Morales</option>
+                    <option value="Peter Parker">Peter Parker</option>
+                    <option value="Miles Morales">Miles Morales</option>
                 </select>
                 <p id="res" class="chk"></p>
                 <button onclick="cadastrar()">Cadastro</button>
@@ -119,7 +119,7 @@
                     if (resposta.ok) {
                         setTimeout(() => {
                             window.location = "login.html";
-                        }, "1000");
+                        }, "800");
 
                     } else {
                         alert('Houve um erro ao tentar realizar o cadastro!')

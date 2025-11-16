@@ -79,7 +79,36 @@ function cadastrar(req, res) {
     }
 }
 
+function quiz(req, res) {
+    var id = req.body.idServer;
+    var pontuacao = req.body.pontuacaoFinalServer;
+
+    if (id == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else if (pontuacao == undefined) {
+        res.status(400).send("Sua pontuação está indefinida!");
+    } else {
+
+    usuarioModel.quiz(id, pontuacao)
+        .then(
+            function (resultadoQuiz) {
+                res.json(resultadoQuiz)
+            }
+        ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao enviar a pontuação! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    quiz
 }

@@ -22,7 +22,17 @@ function cadastrar(nome, email, senha, preferencia) {
     return database.executar(instrucaoSql);
 }
 
+function quiz(id, pontuacao) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function quiz():", id, pontuacao);
+
+    var instrucaoSql = `INSERT INTO jogoQuiz (id_usuario, id_quiz, pontuacao) VALUES ('${id}', '1', '${pontuacao}')`
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    quiz
 };
