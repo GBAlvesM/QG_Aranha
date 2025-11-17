@@ -14,14 +14,27 @@ id INT PRIMARY KEY AUTO_INCREMENT,
 nomeQuiz VARCHAR(75)
 );
 
+
 CREATE TABLE jogoQuiz (
+id INT AUTO_INCREMENT,
 id_usuario INT,
 id_quiz INT,
-PRIMARY KEY (id_usuario, id_quiz),
+PRIMARY KEY (id, id_usuario, id_quiz),
 FOREIGN KEY (id_usuario) REFERENCES usuario (id),
 FOREIGN KEY (id_quiz) REFERENCES quiz(id),
-acertos INT,
-erros INT 
+pontuacao INT
 );
+
+INSERT INTO quiz VALUES 
+	(1, 'Quiz Central Aranha');
+    
+SELECT * FROM jogoQuiz;
+
+SELECT * FROM usuario;
+
+
+
+
+
 
 

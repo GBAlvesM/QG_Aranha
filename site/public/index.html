@@ -40,7 +40,7 @@
         <div class="texthq">
             <h1>Será que você realmente conhece o Homem-Aranha?</h1>
             <p>Só os verdadeiros fãs do amigo da vizinhança conseguem acertar todas as perguntas, prove que o seu sentido aranha está afiado!</p>
-            <a href="quiz.html">Iniciar Quiz</a>
+            <a href="quiz.html" onclick="logado2()" id="linkquiz2">Iniciar Quiz</a>
         </div>
     </div>
     <div class="conteudor">
@@ -89,7 +89,7 @@
             <a href="index.html">Início</a>
             <a href="historia.html">História</a>
             <a href="filmes.html">Filmes</a>
-            <a href="quiz.html">Quiz</a>
+            <a href="quiz.html" onclick="logado3()" id="linkquiz3">Quiz</a>
             <a href="sobre.html">Sobre Mim</a>
         </div>
         <div class="conteudorodape">
@@ -103,8 +103,28 @@
     </footer>
 </body>
 <script>
-    function logado () {
+    function logado() {
         var link = document.getElementById("linkquiz")
+
+        if (sessionStorage.getItem("ID_USUARIO")) {
+            link.href = "quiz.html"
+        } else {
+            link.href = "login.html"
+        }
+    }
+
+    function logado2() {
+        var link = document.getElementById("linkquiz2")
+
+        if (sessionStorage.getItem("ID_USUARIO")) {
+            link.href = "quiz.html"
+        } else {
+            link.href = "login.html"
+        }
+    }
+
+    function logado3() {
+        var link = document.getElementById("linkquiz3")
 
         if (sessionStorage.getItem("ID_USUARIO")) {
             link.href = "quiz.html"

@@ -55,6 +55,7 @@
             <div id="botoes">
                 <button onclick="submeter()" id="btnSubmeter">Enviar resposta</button>
                 <button onclick="avancar()" id="btnProx" disabled>Ir para próxima questão</button>
+                <button onclick="resultados()" style="display: none;" id="btnDash">Ver seu desempenho</button>
                 <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
             </div>
         </div>
@@ -331,11 +332,19 @@
                 }),
             })
 
+        btnDash.style.display = "block"
         btnProx.disabled = true
         btnSubmeter.disabled = true
+
+        btnProx.style.display = "none"
+        btnSubmeter.style.display = "none"
         // btnConcluir.disabled = true
         btnTentarNovamente.disabled = false
 
+    }
+
+    function resultados() {
+        window.location.href = "dashboard/inicial.html"
     }
 </script>
 </html>

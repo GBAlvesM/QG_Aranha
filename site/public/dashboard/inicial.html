@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
+    <title>Dashboard</title>
+</head>
+<body onload="dados()">
+    <div id="container">
+        <div id="boxdash">
+            <div id="menu">
+                <img src="../assets/logo.png" alt="" class="logo">
+                <a href="inicial.html">Início</a>
+                <a href="">Ranking</a>
+            </div>
+            <div id="conteudo">
+                <div id="bv">
+                    <h1>Olá, <span id="nomeUser"></span>, veja os seus resultados!</h1>
+                </div>
+                <div id="grafs">
+                    <div id="sessao1">
+                        <div id="kpis">
+                            <div class="cardkpi">ultima pontuacao</div>
+                            <div class="cardkpi">maior pontuacao</div>
+                            <div class="cardkpi">% de acertos ?</div>
+                        </div>
+                        <div id="graficoTentativas">
+                            o
+                        </div>
+                        <div id="graficoMedia">
+                            o
+                        </div>
+                    </div>
+                    <div id="sessao2">
+                        <h2>Qual Homem-Aranha a comunidade prefere?</h2>
+                        <div id="graficoPreferencia"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function dados() {
+        document.getElementById("nomeUser").innerHTML = sessionStorage.getItem('NOME_USUARIO')
+    }
+</script>
+</html>
