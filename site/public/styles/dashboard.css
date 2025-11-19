@@ -26,7 +26,7 @@ body {
     background-repeat: no-repeat, repeat;
     background-size: cover, 25%;
     background-position: left top;
-    background-color: rgb(180, 39, 39);
+    background-color: #b42727;
     background-blend-mode: darken, soft-light;
     padding: 10px;
 
@@ -49,22 +49,19 @@ body {
 #menu {
     height: 100%;
     width: 18%;
-    background-color: rgb(36, 108, 175);
+    background-color: #246caf;
     border-right: 2px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     padding: 15px;
-    font-size: 1.9rem;
-    gap: 20px;
-    text-align: left;
+    font-size: 2rem;
+    text-align: center;
 }
 
 #menu a {
-    text-decoration: none;
-    color: white;
-    font-family: var(--fonte-titulo);
-    text-align: left;
+    text-align: center;
 }
 
 .logo {
@@ -101,7 +98,9 @@ body {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+
+    box-shadow: 3px 4px black;
 }
 
 #sessao2 {
@@ -109,12 +108,14 @@ body {
     width: 50%;
     border: 1px solid black;
     padding: 10px;
+
+    box-shadow: 3px 4px black;
 }
 
 #sessao2 h2 {
     font-family: var(--fonte-titulo);
     font-weight: 200;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     margin-bottom: 15px;
 }
 
@@ -132,17 +133,29 @@ body {
     width: 180px;
     border: 1px solid black;
     box-shadow: 2px 3px black;
+    padding: 5px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.cardkpi span {
+   font-size: 3.6rem;
+   font-family: var(--fonte-titulo);
+}
+
+.cardkpi p {
+    margin-bottom: 2px;
 }
 
 #graficoTentativas {
     width: 100%;
-    height: 37%;
+    height: 39%;
     border: 1px solid red;
 }
 
 #graficoMedia {
     width: 100%;
-    height: 37%;
+    height: 39%;
     border: 1px solid red;
 }
 
@@ -150,4 +163,44 @@ body {
     width: 100%;
     height: 85%;
     border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.itens {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: var(--fonte-titulo);
+    margin-top: -150px;
+}
+
+.itens a {
+    color: white;
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+.itens a:hover {
+    color: #b42727;
+
+}
+
+.logout {
+    font-size: 1.3rem;
+    font-family: var(--fonte-corpo);
+    display: flex;
+    flex-direction: column;
+
+} 
+
+.logout a {
+    color: white;
+    transition-duration: 0.3s;
+    text-decoration: none;
+}
+
+.logout a:hover {
+    text-decoration: underline;
 }

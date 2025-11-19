@@ -1,14 +1,8 @@
 var medidaModel = require("../models/medidaModel");
 
-function buscarUltimasMedidas(req, res) {
+function buscarPreferencia(req, res) {
 
-    const limite_linhas = 7;
-
-    var idAquario = req.params.idAquario;
-
-    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
-
-    medidaModel.buscarUltimasMedidas(idAquario, limite_linhas).then(function (resultado) {
+    medidaModel.buscarPreferencia().then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -16,19 +10,21 @@ function buscarUltimasMedidas(req, res) {
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        console.log("Houve um erro ao buscar as preferências.", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
 
+function buscarKpis(req, res) {
+    var id = req.body.idServer;
+    console.log('ola mundo')
 
-function buscarMedidasEmTempoReal(req, res) {
+    if (id == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else {
 
-    var idAquario = req.params.idAquario;
-
-    console.log(`Recuperando medidas em tempo real`);
-
-    medidaModel.buscarMedidasEmTempoReal(idAquario).then(function (resultado) {
+    medidaModel.buscarKpis(id)
+    .then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -36,13 +32,13 @@ function buscarMedidasEmTempoReal(req, res) {
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        console.log("Houve um erro ao buscar as KPI's.", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
+    }
 }
 
 module.exports = {
-    buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
-
+    buscarPreferencia,
+    buscarKpis
 }

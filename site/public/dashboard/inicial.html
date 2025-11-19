@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/dashboard.css">
     <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard</title>
 </head>
-<body onload="dados()">
+
+<body>
     <div id="container">
         <div id="boxdash">
             <div id="menu">
                 <img src="../assets/logo.png" alt="" class="logo">
-                <a href="inicial.html">Início</a>
-                <a href="">Ranking</a>
+                <div class="itens">
+                    <a href="inicial.html">Início</a>
+                    <a href="">Ranking</a>
+                </div>
+                <div class="logout">
+                    <a href="../quiz.html">Jogar novamente</a>
+                    <a href="../index.html">Sair</a>
+                </div>
             </div>
             <div id="conteudo">
                 <div id="bv">
@@ -22,20 +31,28 @@
                 <div id="grafs">
                     <div id="sessao1">
                         <div id="kpis">
-                            <div class="cardkpi">ultima pontuacao</div>
-                            <div class="cardkpi">maior pontuacao</div>
-                            <div class="cardkpi">% de acertos ?</div>
+                            <div class="cardkpi">
+                                <p>Sua última pontuação:</p><span id="ultNota">#</span>
+                            </div>
+                            <div class="cardkpi">
+                                <p>Sua maior pontuação:</p><span id="maiNota">#</span>
+                            </div>
+                            <div class="cardkpi">
+                                <p>Taxa de acertos:</p><span id="txAcerto">#</span>
+                            </div>
                         </div>
                         <div id="graficoTentativas">
-                            o
+                            <canvas id="myChart2"></canvas>
                         </div>
                         <div id="graficoMedia">
-                            o
+                            <canvas id="myChart3"></canvas>
                         </div>
                     </div>
                     <div id="sessao2">
                         <h2>Qual Homem-Aranha a comunidade prefere?</h2>
-                        <div id="graficoPreferencia"></div>
+                        <div id="graficoPreferencia">
+                            <canvas id="myChart1"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,8 +60,190 @@
     </div>
 </body>
 <script>
-    function dados() {
-        document.getElementById("nomeUser").innerHTML = sessionStorage.getItem('NOME_USUARIO')
+    window.onload = dadosPreferencia()
+
+    function dadosPreferencia() {
+        document.getElementById("nomeUser").innerHTML = sessionStorage.NOME_USUARIO
+        const idUser = sessionStorage.ID_USUARIO
+
+        console.log(idUser)
+
+        fetch("/medidas/preferencias")
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`)
+
+                        let labelsGraf = []
+                        let valores = []
+
+                        resposta.forEach(item => {
+                            labelsGraf.push(item.preferencia)
+                            valores.push(item.Total)
+                        })
+
+                        const ctx = document.getElementById("myChart1")
+
+                        new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: labelsGraf,
+                                datasets: [{
+                                    label: 'Preferências da comunidade',
+                                    data: valores,
+                                    borderWidth: 1,
+                                    borderColor: '#000000',
+                                    backgroundColor: ['#b42727', '#246caf']
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        grid: {
+                                            display: false
+                                        },
+                                        border: {
+                                            display: false
+                                        },
+                                        ticks: {
+                                            display: false
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        labels: {
+                                            font: {
+                                                size: 16,
+                                                family: 'avenir'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    )
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API')
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados para o gráfico ${error.message}`)
+            })
+
+        fetch("/medidas/kpis", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idServer: idUser
+
+            }),
+
+        })
+            .then(function (responsek) {
+                if (responsek.ok) {
+                    responsek.json().then(function (kpisResult) {
+                        console.log(`Dados recebidos: ${JSON.stringify(kpisResult)}`)
+
+                        var ultimaNota = null
+                        var maiorNota = null
+                        var taxaAcerto = null
+
+                        kpisResult.forEach(item => {
+                            ultimaNota = item.Ultima
+                            maiorNota = item.Maior
+                            taxaAcerto = item.Taxa
+
+                            ultNota.innerHTML = ultimaNota
+                            maiNota.innerHTML = maiorNota
+                            txAcerto.innerHTML = taxaAcerto
+                        })
+                    }
+                    )
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API')
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados para o gráfico ${error.message}`)
+            })
     }
+
+
+
+    const ctx = document.getElementById('myChart2');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 7, 11, 15, 10, 6, 9],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                },
+
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 14,
+                            family: 'avenir'
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const ctx2 = document.getElementById('myChart3');
+
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Sua nota', 'Nota média'],
+            datasets: [{
+                label: '# of Votes',
+                data: [6, 10],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 14,
+                            family: 'avenir'
+                        }
+                    }
+                }
+            }
+        }
+    });
+
 </script>
+
 </html>

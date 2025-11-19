@@ -94,7 +94,7 @@
     function logado() {
         var link = document.getElementById("linkquiz")
 
-        if (sessionStorage.getItem("ID_USUARIO")) {
+        if (sessionStorage.ID_USUARIO) {
             link.href = "quiz.html"
         } else {
             link.href = "login.html"
@@ -104,7 +104,7 @@
     function logado3() {
         var link = document.getElementById("linkquiz3")
 
-        if (sessionStorage.getItem("ID_USUARIO")) {
+        if (sessionStorage.ID_USUARIO) {
             link.href = "quiz.html"
         } else {
             link.href = "login.html"

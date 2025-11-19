@@ -1,35 +1,31 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(idAquario, limite_linhas) {
 
+function buscarPreferencia() {
     var instrucaoSql = `SELECT 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        momento,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
-                    FROM medida
-                    WHERE fk_aquario = ${idAquario}
-                    ORDER BY id DESC LIMIT ${limite_linhas}`;
+    preferencia, 
+    COUNT(*) AS 'Total'
+	FROM usuario
+		WHERE preferencia IN ('Peter Parker', 'Miles Morales')
+			GROUP BY preferencia;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idAquario) {
-
+function buscarKpis(id) {
     var instrucaoSql = `SELECT 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
-                        fk_aquario 
-                        FROM medida WHERE fk_aquario = ${idAquario} 
-                    ORDER BY id DESC LIMIT 1`;
+    MAX(pontuacao) AS 'Maior', 
+    (SELECT pontuacao FROM jogoQuiz WHERE id_usuario = '${id}' ORDER BY id DESC LIMIT 1) AS 'Ultima',
+    CONCAT(ROUND((SELECT SUM(pontuacao) FROM jogoQuiz WHERE id_usuario = '${id}') / ((SELECT COUNT(pontuacao) FROM jogoQuiz WHERE id_usuario = '${id}') * 10) * 100, 1), '%') AS 'Taxa'
+	FROM jogoQuiz 
+		WHERE id_usuario = '${id}';`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 module.exports = {
-    buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarPreferencia,
+    buscarKpis
 }
