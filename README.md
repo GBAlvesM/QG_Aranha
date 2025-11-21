@@ -16,9 +16,9 @@ Não é só um site, é uma forma de demonstrar uma paixão minha em código.
 
 A arquitetura do projeto foi desenvolvida utilizando as seguintes tecnologias: 
 
-* **Front-End:** **HTML, CSS e JavaScript** * *Propósito:* Desenvolvimento de uma interface simples, intuitiva e encantadora.
-* **Back-End:** **Node.js** * *Propósito:* Implementar a lógica e fazer comunicação com Front-end e banco de dados. 
-* **Banco de Dados:** **MySQL** * *Propósito:* Modelagem e armazenamento eficiente do conteúdo do universo Homem-Aranha.
+* **Front-End:** **HTML, CSS e JavaScript** - *Propósito:* Desenvolvimento de uma interface simples, intuitiva e encantadora.
+* **Back-End:** **Node.js** - *Propósito:* Implementar a lógica e fazer comunicação com Front-end e banco de dados. 
+* **Banco de Dados:** **MySQL** - *Propósito:* Modelagem e armazenamento eficiente do conteúdo do universo Homem-Aranha.
 
 ---
 
@@ -33,9 +33,7 @@ O Produto Mínimo Viável (MVP) do Central Aranha valida os objetivos do projeto
 ---
 
  **Para clonar o repositório, utilize o comando:**
-    ```
-    git clone https://github.com/GBAlvesM/Central_Aranha.git
-    ```
+   ```bash git clone https://github.com/GBAlvesM/Central_Aranha.git ```
 ---
 
 Desenvolvido por **Gabriel Alves** | Estudante de Análise e Desenvolvimento de Sistemas - SPTech.
