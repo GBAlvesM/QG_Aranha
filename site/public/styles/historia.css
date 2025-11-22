@@ -100,6 +100,132 @@
 }
 
 
+.conteudo {
+    height: fit-content;
+    background: url(../assets/padraoteia.svg), url(../assets/textura.png);
+    background-repeat: no-repeat, repeat;
+    background-size: cover, 40%;
+    background-color: rgb(36, 108, 175);
+    background-blend-mode: multiply, soft-light;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.conteudo h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 3rem;
+    color: white;
+    text-shadow: 2px 3px black;
+}
+
+.cardconteudo {
+    background-color: white;
+    border: 2px solid black;
+    padding: 10px;
+    box-shadow: 3px 4px black;
+    font-family: var(--fonte-corpo);
+    font-size: 1.3rem;
+    width: 70%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.fotosHistoria {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.cardfoto {
+    height: 330px;
+    width: 250px;
+    border: 2px solid black;
+    box-shadow: 3px 4px black;
+}
+
+.cardconteudo h2 {
+    font-family: var(--fonte-titulo);
+    font-weight: lighter;
+    margin-bottom: 15px;
+}
+
+.capa {
+    background: url("../assets/capaestreia.jpg");
+    background-size: cover;
+}
+
+
+.stanlee {
+    background: url("../assets/stansteve.png");
+    background-size: cover;
+}
+
+.tioben {
+    background: url("../assets/tioben.jpeg");
+    background-size: cover;
+}
+
+.viloes {
+    background: url("../assets/viloes.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gwen {
+    background: url("../assets/gwenmorte.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.mj {
+    background: url("../assets/maryjane.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.simbionte {
+    background: url("../assets/simbionte.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.venom {
+    background: url("../assets/venom.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.escarlate {
+    background: url("../assets/escarlate.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.miles {
+    background: url("../assets/mileshq.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.docock {
+    background: url("../assets/docock.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.aranhaverso {
+    background: url("../assets/aranhaverso.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
 .rodape {
     background-color: rgb(12, 12, 12);
     height: 250px;
