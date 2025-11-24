@@ -107,8 +107,65 @@ function quiz(req, res) {
     }
 }
 
+
+function comentar(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var comentario = req.body.comentarioServer;
+    var idUsuario = req.body.idServer;
+
+    // Faça as validações dos valores
+    if (comentario == undefined) {
+        res.status(400).send("Seu comentário está undefined!");
+    } else if (idUsuario == undefined) {
+        res.status(400).send("Seu idUsuario está undefined!");
+    } else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.comentar(comentario, idUsuario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o comentário! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function carregarComentarios(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+
+    // Faça as validações dos valores
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.carregarComentarios()
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o comentário! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
 module.exports = {
     autenticar,
     cadastrar,
-    quiz
+    quiz,
+    comentar,
+    carregarComentarios
 }

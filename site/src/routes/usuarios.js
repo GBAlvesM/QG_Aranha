@@ -16,4 +16,14 @@ router.post("/quiz", function (req, res) {
     usuarioController.quiz(req, res);
 });
 
+router.post("/comentar", function (req, res) {
+    usuarioController.comentar(req, res);
+});
+
+router.get("/carregarComentarios", function (req, res) {
+    usuarioController.carregarComentarios(req, res);
+});
+
+
+
 module.exports = router;
