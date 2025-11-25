@@ -26,6 +26,19 @@ FOREIGN KEY (id_quiz) REFERENCES quiz(id),
 pontuacao INT
 );
 
+CREATE TABLE comentariosMural (
+id INT AUTO_INCREMENT,
+id_usuario INT,
+id_mural INT,
+PRIMARY KEY (id, id_usuario, id_mural),
+FOREIGN KEY (id_usuario) REFERENCES usuario (id),
+FOREIGN KEY (id_mural) REFERENCES mural(id),
+comentario VARCHAR(255)
+);
+
+INSERT INTO mural (nomeMural) VALUES
+	('Mural Filmes');
+
 INSERT INTO quiz VALUES 
 	(1, 'Quiz Central Aranha');
 
