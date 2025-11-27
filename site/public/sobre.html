@@ -18,8 +18,9 @@
             <a href="sobre.html" style="color: #ff0000;">Sobre Mim</a>
         </div>
         <div class="user">
-            <a href="login.html">Login</a>
-            <a href="cadastro.html">Cadastro</a>
+            <a href="login.html" id="logar">Login</a>
+            <a href="cadastro.html" id="cadastro">Cadastro</a>
+            <a href="index.html" onclick="logout()" id="sairAgora" style="display: none;">Sair</a>
         </div>
     </div>
     <div class="conteudo">
@@ -109,6 +110,16 @@
         } else {
             link.href = "login.html"
         }
+    }
+
+    if (sessionStorage.ID_USUARIO) {
+        logar.style.display = "none"
+        cadastro.style.display = "none"
+        sairAgora.style.display = "block"
+    }
+
+    function logout() {
+        sessionStorage.clear()
     }
 </script>
 </html>
