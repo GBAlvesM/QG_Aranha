@@ -121,7 +121,7 @@ body {
 
 .amazing {
     height: 800px;
-    transform: translateY(-240px) translateX(-40px);
+    transform: translateY(-240px) translateX(-79px);
     filter: drop-shadow(4px 4px #000000);
 }
 
