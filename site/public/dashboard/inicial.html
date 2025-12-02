@@ -42,9 +42,11 @@
                             </div>
                         </div>
                         <div id="graficoTentativas">
+                            <h3>Suas últimas tentativas</h3>
                             <canvas id="myChart2"></canvas>
                         </div>
                         <div id="graficoMedia">
+                            <h3>Sua nota média X nota média da comunidade</h3>
                             <canvas id="myChart3"></canvas>
                         </div>
                     </div>
@@ -176,17 +178,17 @@
                         new Chart(ctx3, {
                             type: 'bar',
                             data: {
-                                labels: ['Comparativo de notas'],
+                                labels: ['Notas'],
                                 datasets: [{
                                     label: `Sua média: (${mediaU})`,
-                                    data: mediaU,
+                                    data: [mediaU],
                                     borderWidth: 2,
                                     borderColor: '#000000',
                                     backgroundColor: ['#246caf', '#b42727'],
                                 },
                                 {
                                     label: `Média da comunidade: (${mediaG})`,
-                                    data: mediaG,
+                                    data: [mediaG],
                                     borderWidth: 2,
                                     borderColor: '#000000',
                                     backgroundColor: ['#b42727'],
@@ -194,7 +196,6 @@
                             },
 
                             options: {
-
                                 responsive: true,
                                 maintainAspectRatio: false,
                                 indexAxis: 'y',
@@ -207,7 +208,7 @@
                                     }
                                 },
                                 layout: {
-                                    padding: 5
+                                    padding: 18
                                 },
                                 plugins: {
                                     legend: {
@@ -265,10 +266,10 @@
                         new Chart(ctxT, {
                             type: 'bar',
                             data: {
-                                labels: `${tentativas}`,
+                                labels: tentativas,
                                 datasets: [{
                                     label: 'Pontuação por tentatitva',
-                                    data: `${pontuacaoTentativa}`,
+                                    data: pontuacaoTentativa,
                                     borderWidth: 2,
                                     borderColor: '#000000',
                                     backgroundColor: '#b42727e6'
@@ -277,6 +278,9 @@
                             options: {
                                 responsive: true,
                                 maintainAspectRatio: false,
+                                layout: {
+                                    padding: 15
+                                },
                                 scales: {
                                     y: {
                                         beginAtZero: true,
