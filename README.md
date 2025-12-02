@@ -33,7 +33,6 @@ O Produto Mínimo Viável (MVP) do QG Aranha valida os objetivos do projeto por 
 ---
 Para clonar o repositório **QG Aranha** e iniciar o trabalho, utilize o comando:
 
-    ```bash
     git clone https://github.com/GBAIvesM/Central_Aranha.git
 
 
